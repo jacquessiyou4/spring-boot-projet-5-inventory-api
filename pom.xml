@@ -19,6 +19,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <flyway.version>10.20.1</flyway.version>
     </properties>
 
     <dependencies>
@@ -49,6 +50,25 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!--
+            Flyway : versionne le schéma de base. Le schéma n'est plus déduit des
+            entités au démarrage (ddl-auto: update), pratique en développement mais
+            dangereux en production car il ne supprime rien, ne renomme rien et
+            n'est ni reproductible ni relisible.
+            Version fixée explicitement : celle gérée par Spring Boot 3.3.0 (10.10.0)
+            diffère de celle disponible ici.
+        -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>${flyway.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

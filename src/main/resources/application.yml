@@ -6,12 +6,19 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+  # Le schéma est créé et versionné par Flyway (src/main/resources/db/migration).
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
   jpa:
     # Les contrôleurs renvoient des DTO : aucune session ne doit rester ouverte
     # pendant le rendu de la réponse.
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      # « validate » : Hibernate vérifie que les entités correspondent au schéma
+      # migré, sans jamais le modifier lui-même.
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

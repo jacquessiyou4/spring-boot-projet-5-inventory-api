@@ -73,3 +73,19 @@ mvn spring-boot:run
 ```bash
 mvn test
 ```
+
+## Schéma de base de données
+
+Le schéma est versionné avec **Flyway** : les scripts se trouvent dans
+`src/main/resources/db/migration` et sont appliqués automatiquement au
+démarrage, dans l'ordre des versions.
+
+`spring.jpa.hibernate.ddl-auto` est réglé sur **`validate`** : Hibernate vérifie
+que les entités correspondent au schéma migré, sans jamais le modifier lui-même.
+Toute divergence fait échouer le démarrage, au lieu de passer inaperçue.
+
+Pour faire évoluer le schéma, ajoutez un nouveau fichier (`V2__...sql`) — ne
+modifiez jamais une migration déjà appliquée.
+
+Les tests s'exécutent sur H2 en mémoire, avec Flyway désactivé et un schéma
+généré depuis les entités (`create-drop`).

@@ -1,4 +1,8 @@
 spring:
+  # Les tests tournent sur H2 en mémoire : le schéma y est généré depuis les
+  # entités (create-drop) et les migrations PostgreSQL ne s'appliquent pas.
+  flyway:
+    enabled: false
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
     driver-class-name: org.h2.Driver
