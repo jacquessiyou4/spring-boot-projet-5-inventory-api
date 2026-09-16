@@ -2,6 +2,12 @@
 
 API Spring Boot 3 / Java 17 pour gérer un inventaire de produits avec suivi des stocks et **alertes de stock bas**.
 
+> 📘 **Procédure de test pas à pas :** voir [GUIDE_DE_TEST.md](GUIDE_DE_TEST.md)
+> — lancement depuis le terminal et vérification de chaque fonctionnalité
+> exigée par le cahier des charges.
+
+> 🔗 **Lien du dépôt GitHub :** voir [LIEN_GITHUB.md](LIEN_GITHUB.md)
+
 ## Prérequis
 - Java 17, Maven 3.9+
 - PostgreSQL 15, Redis 7 (ou les conteneurs fournis par Docker Compose)
