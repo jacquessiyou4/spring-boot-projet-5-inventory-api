@@ -25,6 +25,14 @@ public class Movement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Exclu de toString() et equals()/hashCode() : la relation est bidirectionnelle.
+     * Lombok @Data génère sinon des méthodes qui s'appellent mutuellement entre
+     * les deux entités (article -> commentaires -> article -> ...), ce qui lève
+     * un StackOverflowError dès qu'on journalise ou compare une entité chargée.
+     */
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

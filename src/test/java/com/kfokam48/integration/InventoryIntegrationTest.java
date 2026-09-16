@@ -229,4 +229,17 @@ class InventoryIntegrationTest {
                 .andExpect(jsonPath("$[0].quantityBefore", is(20)))
                 .andExpect(jsonPath("$[0].quantityAfter", is(7)));
     }
+
+    /**
+     * Régression : un prix dépassant la capacité de la colonne NUMERIC(10,2)
+     * provoquait une 500 au moment de l'INSERT.
+     */
+    @Test
+    void createProduct_withOversizedPrice_shouldReturn400() throws Exception {
+        mockMvc.perform(post("/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"sku\":\"BIG-1\",\"name\":\"Hors norme\",\"category\":\"Test\"," +
+                                 "\"price\":999999999999.99,\"initialStock\":1,\"minStockLevel\":5}"))
+                .andExpect(status().isBadRequest());
+    }
 }

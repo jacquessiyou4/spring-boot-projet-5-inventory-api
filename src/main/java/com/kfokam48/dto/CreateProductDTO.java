@@ -35,6 +35,8 @@ public class CreateProductDTO {
 
     @NotNull(message = "Price is required")
     @DecimalMin(value = "0.01", message = "Price must be greater than 0")
+    // Borne haute : la colonne est un NUMERIC(10,2).
+    @DecimalMax(value = "99999999.99", message = "Price must not exceed 99 999 999.99")
     private BigDecimal price;
 
     /**

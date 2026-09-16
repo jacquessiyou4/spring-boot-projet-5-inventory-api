@@ -66,11 +66,27 @@ public class Product {
     @Builder.Default
     private ProductStatus status = ProductStatus.ACTIVE;
 
+    /**
+     * Exclu de toString() et equals()/hashCode() : la relation est bidirectionnelle.
+     * Lombok @Data génère sinon des méthodes qui s'appellent mutuellement entre
+     * les deux entités (article -> commentaires -> article -> ...), ce qui lève
+     * un StackOverflowError dès qu'on journalise ou compare une entité chargée.
+     */
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     @Builder.Default
     private List<Movement> movements = new ArrayList<>();
 
+    /**
+     * Exclu de toString() et equals()/hashCode() : la relation est bidirectionnelle.
+     * Lombok @Data génère sinon des méthodes qui s'appellent mutuellement entre
+     * les deux entités (article -> commentaires -> article -> ...), ce qui lève
+     * un StackOverflowError dès qu'on journalise ou compare une entité chargée.
+     */
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     @Builder.Default
